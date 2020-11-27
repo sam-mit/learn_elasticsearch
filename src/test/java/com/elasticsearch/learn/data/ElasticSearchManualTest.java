@@ -79,6 +79,13 @@ public class ElasticSearchManualTest {
   }
 
   @Test
+  public void givenArticleService_findAll() {
+    articleRepository.findAll().forEach( article -> {
+      assertNotNull(article);
+      System.out.println(article);
+    });
+  }
+  @Test
   public void givenArticleService_whenSaveArticle_thenIdIsAssigned() {
     final List<Author> authors = asList(new Author("John Smith"), johnDoe);
 
@@ -92,6 +99,7 @@ public class ElasticSearchManualTest {
   @Test
   public void givenPersistedArticles_whenSearchByAuthorsName_thenRightFound() {
     final Page<Article> articleByAuthorName = articleRepository.findByAuthorsName(johnSmith.getName(), PageRequest.of(0, 10));
+
     assertEquals(2L, articleByAuthorName.getTotalElements());
   }
 
