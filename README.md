@@ -3,4 +3,7 @@ learn elastic search
 
 
 ## initial days
-learning by kinesis
+....
+
+## learning from Baedlung Article
+[Baeldung - Tutorial on Elasticsearch using Spring Data](https://www.baeldung.com/spring-data-elasticsearch-tutorial)
