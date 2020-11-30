@@ -6,6 +6,7 @@ import static org.springframework.data.elasticsearch.annotations.FieldType.Text;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -19,8 +20,11 @@ import org.springframework.data.elasticsearch.annotations.MultiField;
 @Document(indexName = "blog")
 public class Article {
 
+  /**
+   * id - generated as UUIDs
+   */
   @Id
-  private String id;
+  private String id = UUID.randomUUID().toString();
 
   @MultiField(mainField = @Field(type = Text, fielddata = true), otherFields = { @InnerField(suffix = "verbatim", type = Keyword) })
   private String title;
