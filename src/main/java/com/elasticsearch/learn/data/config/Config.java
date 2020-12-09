@@ -22,33 +22,18 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @ComponentScan(basePackages = { "com.elasticsearch.learn.data" })
 public class Config {
 
-//  @Bean
-//  RestHighLevelClient client() {
-//    ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-//      .connectedTo("vpc-dal-dev1-blue-spaebqqcj62mlv6vf2hrpbpa3e.eu-west-1.es.amazonaws.com:9200")
-//      .build();
-//
-//    return RestClients.create(clientConfiguration)
-//      .rest();
-//  }
+@Bean
+RestHighLevelClient client() {
+   ClientConfiguration clientConfiguration = ClientConfiguration.builder()
+     .connectedTo("localhost:9200")
+     .build();
+   return RestClients.create(clientConfiguration)
+      .rest();
+ }
 
-  @Bean
-  public RestHighLevelClient defaultHighLevelClient() {
-    try {
-      System.out.println("creating Elasticsearch high level client :" +  url.toString());
-      InetAddress address = InetAddress.getByName(url.getHost());
-      RestClientBuilder builder = RestClient
-        .builder(new HttpHost(address, address.getHostName(), url.getPort(), url.getProtocol()));
-      builder.setRequestConfigCallback(requestConfigBuilder -> requestConfigBuilder.setConnectTimeout(30000).setSocketTimeout(60000));
-//      builder.setMaxRetryTimeoutMillis(60000);
-      return new RestHighLevelClient(builder);
-    } catch (final UnknownHostException | MalformedURLException err) {
-      throw new IllegalStateException("Unable to create high level elasticsearch rest client.", err);
-    }
-  }
 
   @Bean
   public ElasticsearchOperations elasticsearchTemplate() {
-    return new ElasticsearchRestTemplate(defaultHighLevelClient());
+    return new ElasticsearchRestTemplate(client());
   }
 }
