@@ -16,8 +16,10 @@ import com.elasticsearch.learn.data.config.Config;
 import com.elasticsearch.learn.data.model.Article;
 import com.elasticsearch.learn.data.model.Author;
 import com.elasticsearch.learn.data.repository.ArticleRepository;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,9 @@ public class ElasticSearchManualTest {
 
   @Autowired
   private ElasticsearchRestTemplate elasticsearchTemplate;
+
+  @Autowired
+  private RestHighLevelClient client;
 
   @Autowired
   private ArticleRepository articleRepository;
@@ -74,8 +79,9 @@ public class ElasticSearchManualTest {
   }
 
   @AfterEach
-  public void after() {
+  public void after() throws IOException {
     articleRepository.deleteAll();
+    client.close();
   }
 
   @Test

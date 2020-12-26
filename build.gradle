@@ -29,7 +29,9 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch
+	implementation group: 'org.springframework.data', name: 'spring-data-elasticsearch', version: '4.1.1'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
 	compileOnly 'org.projectlombok:lombok'

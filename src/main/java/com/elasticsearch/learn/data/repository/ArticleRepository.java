@@ -1,7 +1,6 @@
 package com.elasticsearch.learn.data.repository;
 
 import com.elasticsearch.learn.data.model.Article;
-import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;

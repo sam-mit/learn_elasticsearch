@@ -22,6 +22,9 @@ public class Article {
 
   /**
    * id - generated as UUIDs
+   * dynamic creation of index at application level
+   * will reduce the time fot the document to
+   * be created
    */
   @Id
   private String id = UUID.randomUUID().toString();
